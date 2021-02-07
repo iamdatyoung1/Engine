@@ -26,6 +26,7 @@ public:
 	SDL_Window* GetWindow() const;
 
 private:
+	
 	//Set PRe Atributes 
 	void SetPreAttributes();
 	//Set Post Attributes
