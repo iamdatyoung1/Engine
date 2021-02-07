@@ -3,6 +3,10 @@
 #include "Window.h"
 //in order to gain acces to smart pointers you need to get acces to memory
 #include <memory>
+#include "Timer.h"
+#include "Debug.h"
+#include "GameInterface.h"
+#include "Scene.h"
 class CoreEngine
 {
 public:
@@ -18,7 +22,12 @@ public:
 	//does not return anything
 	void Run();
 	//return the varrible for isrunning
-	bool GetIsRunning();
+	bool GetIsRunning() const;
+	void Exit();
+	int GetCurrentScene() const;
+
+	void SetGameInterface(GameInterface* gameInterFace_);
+	void SetCurrentScene(int SceneNum_);
 private:
 	//constructor
 	CoreEngine();
@@ -37,6 +46,12 @@ private:
 	Window* window;
 	//check to see if engine is running or not
 	bool isRunning;
+	Timer timer;
+	unsigned int fps;
+
+	GameInterface* gameInterface;
+
+	int currentSceneNum;
 };
 
 #endif
