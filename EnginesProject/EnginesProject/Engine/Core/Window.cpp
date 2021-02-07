@@ -21,7 +21,7 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 	// no reason to add "this" but its there anyways
 	this->width = width_;
 	this->height = height_;
-
+	//ask prof
 	SetPreAttributes();
 	// convert string name into a charstar by putting it into a certain way ( c_str())
 	window = SDL_CreateWindow(name_.c_str(),
@@ -36,7 +36,7 @@ bool Window::OnCreate(std::string name_, int width_, int height_)
 		std::cout << "Failed to create window" << std::endl;
 		return false;
 	}
-
+	//ask prof 
 	context = SDL_GL_CreateContext(window);
 	SetPostAttributes();
 
