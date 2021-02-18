@@ -20,21 +20,27 @@ bool GameScene::OnCreate()
 	//first triangle
 	vertexList.reserve(6);
 	v.position = glm::vec3(0.5f, 0.5f, 0.0f);
+	v.colour = glm::vec3(1.0f, 0.0f, 0.0f);
 	vertexList.push_back(v);
 	v.position = glm::vec3(-0.5f, -0.5f, 0.0f);
+	v.colour = glm::vec3(1.0f, 2.0f, 0.0f);
 	vertexList.push_back(v);
 	v.position = glm::vec3(0.5f, -0.5f, 0.0f);
+	v.colour = glm::vec3(1.0f, 0.0f, 3.0f);
 	vertexList.push_back(v);
 	//second triangle
 	v.position = glm::vec3(-0.5, 0.5, 0.0f);
+	v.colour = glm::vec3(1.0f, 0.0f, 0.0f);
 	vertexList.push_back(v);
 	v.position = glm::vec3(-0.5, -0.5, 0.0f);
+	v.colour = glm::vec3(1.0f, 2.0f, 0.0f);
 	vertexList.push_back(v);
 	v.position = glm::vec3(0.5, 0.5, 0.0f);
+	v.colour = glm::vec3(1.0f, 0.0f, 3.0f);
 	vertexList.push_back(v);
 
-
-	Model* model = new Model();
+	//passes shader name
+	Model* model = new Model(ShaderHandler::GetInstance()->GetShader("colourShader"));
 	model->AddMesh(new Mesh(vertexList));
 	shape = new GameObject(model);
 	return true;
