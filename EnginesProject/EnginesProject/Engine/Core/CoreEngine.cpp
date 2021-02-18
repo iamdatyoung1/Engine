@@ -32,6 +32,9 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 		//return to vaule of false
 		return isRunning = false;
 	}
+	ShaderHandler::GetInstance()->CreateProgram("colourShader", 
+		"Engine/Shaders/ColourVertexShader.glsl",
+		"Engine/Shaders/ColourFragmentShader.glsl");
 	//if the gameinterface is not creating the pull up the string game failed and call ondestroy
 	if (gameInterface) {
 		if (!gameInterface->OnCreate()) {
@@ -43,7 +46,7 @@ bool CoreEngine::OnCreate(std::string name_, int width_, int height_)
 	//Dont need this but it is good to have cause it allows you to know if it worked or not
 	Debug::Info("Everything worked", "CoreEngine.cpp", __LINE__);
 	timer.Start();
-	//if the creation of the winodw works prroperly then return isRunning varrible to true 
+	//if the creation of the window works properly then return isRunning varrible to true 
 	return isRunning = true;
 }
 
@@ -106,7 +109,7 @@ void CoreEngine::Update(const float deltaTime_)
 
 void CoreEngine::Render()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (gameInterface) {
 		gameInterface->Render();
@@ -118,6 +121,7 @@ void CoreEngine::Render()
 
 void CoreEngine::OnDestroy()
 {
+	ShaderHandler::GetInstance()->OnDestroy();
 	//allows destroy from inside out 
 	delete gameInterface;
 	gameInterface = nullptr;
