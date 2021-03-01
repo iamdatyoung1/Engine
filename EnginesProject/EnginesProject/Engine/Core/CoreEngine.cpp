@@ -86,6 +86,21 @@ int CoreEngine::GetCurrentScene() const
 	return currentSceneNum;
 }
 
+float CoreEngine::GetScreenHeight() const
+{
+	return static_cast<float>(window->GetHeight());
+}
+
+float CoreEngine::GetScreenWidth() const
+{
+	return static_cast<float>(window->GetWidth());
+}
+
+Camera* CoreEngine::GetCamera() const
+{
+	return camera;
+}
+
 void CoreEngine::SetGameInterface(GameInterface* gameInterFace_)
 {
 	//this is just allowing us to set it to the pointer that is getting passed through 
@@ -95,6 +110,11 @@ void CoreEngine::SetGameInterface(GameInterface* gameInterFace_)
 void CoreEngine::SetCurrentScene(int SceneNum_)
 {
 	currentSceneNum = SceneNum_;
+}
+
+void CoreEngine::SetCamera(Camera* camera_)
+{
+	camera = camera_;
 }
 
 void CoreEngine::Update(const float deltaTime_)
@@ -123,6 +143,8 @@ void CoreEngine::OnDestroy()
 {
 	ShaderHandler::GetInstance()->OnDestroy();
 	//allows destroy from inside out 
+	delete camera;
+	camera = nullptr;
 	delete gameInterface;
 	gameInterface = nullptr;
 	delete window;
